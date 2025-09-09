@@ -44,7 +44,9 @@ const showPlants = (allPlants) => {
                 <img src='${plant.image}' alt="">
             </div>
             <div class='p-4'>
-                <h3 class="font-semibold mt-3">${plant.name}</h3>
+                <button onclick="plantDetails(${plant.id})"
+                    class="font-semibold mt-3">${plant.name}
+                </button>
                 <p class="text-[.875rem] text-[#1F2937] mt-2 text-justify h-30">${plant.description}</p>
                 <div class="flex justify-between items-center mt-2 w-full">
                     <p class="bg-green-200 text-green-600 text-[.875rem] rounded-3xl px-3 py-[2px] ">${plant.category}</p>
@@ -55,6 +57,7 @@ const showPlants = (allPlants) => {
         </div>
         `
         allTreeCard.appendChild(div);
+        // console.log(plant);
     });
 };
 
@@ -64,4 +67,37 @@ const plantByCategory = (id) => {
     fetch(url)
         .then(res => res.json())
         .then(data => showPlants(data.plants));
+}
+
+/** Plants Details Modal */
+const plantDetails = (id) => {
+    // console.log(plant);
+    const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => showDetails(data.plants));
+}
+// {
+//     "id": 29,
+//     "image": "https://i.ibb.co.com/4g4J0Tkj/lotus-min.jpg",
+//     "name": "Lotus",
+//     "description": "A sacred aquatic plant with beautiful pink or white flowers. Symbolizes purity and grows in still, shallow water.",
+//     "category": "Aquatic Plant",
+//     "price": 450
+// }
+const showDetails = (details) => {
+    // console.log(details);
+    const detailsBox = document.getElementById('details-container');
+    detailsBox.innerHTML = `
+    <h2 class="text-xl font-semibold mb-4">Mango Tree</h2>
+
+    <div class="h-50 overflow-hidden rounded-md">
+        <img src='${details.image}' alt="">
+    </div>
+
+    <p class="mt-2"><span class="font-bold">Category: </span>${details.category}</p>
+    <p class="mt-2"><span class="font-bold">Price: </span>৳${details.price}</p>
+    <p class="mt-2"><span class="font-bold">Description: </span>${details.description}</p>
+    `
+    document.getElementById('modal').showModal();
 }
