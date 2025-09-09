@@ -94,7 +94,7 @@ const showDetails = (details) => {
     `
     document.getElementById('modal').showModal();
 }
-
+let i = 0;
 /**  Cart Functionality  */
 const addToCart = (id) => {
     // console.log(id);
@@ -103,6 +103,7 @@ const addToCart = (id) => {
     .then(res => res.json())
     .then(plant => {
         const add = {
+            id : ++i,
             treeName : plant.plants.name,
             price : plant.plants.price
         }
@@ -116,16 +117,14 @@ const addToCart = (id) => {
                 <h3>${plant.plants.name}</h3>
                 <p class="mt-[2px]">৳${plant.plants.price} x 1</p>
             </div>
-            <p>❌</p>
+            <p onclick="removeTotalCart()" >❌</p>
         </div>
         `
         totalContainer.appendChild(newElement);
 
-        const totalPrice = parseInt(document.getElementById('total-price').innerText);
+        let totalPrice = parseInt(document.getElementById('total-price').innerText);
         totalPrice += add.price;
-        console.log(totalPrice);
         document.getElementById('total-price').innerText = totalPrice;
-        // totalPrice();
     });
 }
 
