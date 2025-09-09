@@ -27,7 +27,7 @@
     <!-- Header Section -->
     <header>
         <!-- Navbar -->
-        <nav class="navbar bg-base-100 shadow-sm bg-green-600">
+        <nav class="navbar bg-base-100 shadow-sm bg-green-600 sticky top-0">
             <div class="navbar-start">
                 <div class="dropdown">
                     <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -68,8 +68,8 @@
             </div>
 
             <div class="banner-container text-center mx-auto max-w-120  space-y-5 py-15">
-                <h1 class="text-[#1F2937] text-3xl md:text-4xl font-bold">Plant a Tree, Grow a Future</h1>
-                <p class="text-[#1F2937] mx-auto">Join our mission to plant 1 million trees and make the Earth
+                <h1 class="text-[#1F2937] text-2xl md:text-4xl font-bold">Plant a Tree, Grow a Future</h1>
+                <p class="text-[#1F2937] max-w-86 mx-auto">Join our mission to plant 1 million trees and make the Earth
                     greener for future
                     generations.</p>
                 <div class="">
@@ -91,9 +91,9 @@
         <h2 class="text-2xl font-semibold text-center text-[#1F2937] pb-10">Choose Your Trees</h2>
 
         <!-- Card Item Section -->
-        <section class="flex items-start">
+        <section class="flex flex-col md:flex-row gap-5">
             <!-- Side bar Section-->
-            <aside class="side-bar w-8/50 mr-3">
+            <aside class="side-bar md:w-8/50 mr-3">
                 <h1 class="font-bold text-xl py-2 pl-3">Categories</h1>
                 <h2 class="py-2 pl-3 hover:bg-green-600 hover:text-white font-medium rounded-lg">All Trees</h2>
                 <h2 class="py-2 pl-3 hover:bg-green-600 hover:text-white font-medium rounded-lg">Fruit Trees</h2>
@@ -109,7 +109,7 @@
             </aside>
 
             <!-- Tree Card Container -->
-            <div class="grid grid-cols-4 gap-3 w-full">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
 
                 <div class="flex flex-col items-start bg-white rounded-xl p-3">
                     <div class="w-1/1 h-33   bg-gray-300 rounded-xl">
@@ -157,29 +157,6 @@
                         <p class="font-semibold">৳500</p>
                     </div>
                     <button class="bg-green-600 text-white rounded-3xl w-full mt-3 py-1.5">Add to Cart</button>
-                </div>
-
-                <!-- Total card -->
-                <div class="bg-white rounded-xl p-4 row-span-2">
-                    <h2 class="text-xl font-bold ">Your Cart</h2>
-                    <div class="flex justify-between items-center w-full bg-sky-50 py-2 px-3 mt-2 rounded-xl">
-                        <div>
-                            <h3>Mango Tree</h3>
-                            <p class="mt-[2px]">৳500 x 1</p>
-                        </div>
-                        <p>❌</p>
-                    </div>
-                    <div class="flex justify-between items-center w-full bg-sky-50 py-2 px-3 mt-2 rounded-xl">
-                        <div>
-                            <h3>Mango Tree</h3>
-                            <p class="mt-[2px]">৳500 x 1</p>
-                        </div>
-                        <p>❌</p>
-                    </div>
-                    <div class="flex justify-between items-center w-full mt-4 font-semibold">
-                        <p>Total</p>
-                        <p>৳1000</p>
-                    </div>
                 </div>
 
                 <div class="flex flex-col items-start bg-white rounded-xl p-3">
@@ -232,17 +209,40 @@
 
 
             </div>
+
+            <!-- Total card -->
+            <div class="bg-white rounded-xl p-4 row-span-2 md:w-6/20">
+                <h2 class="text-xl font-bold ">Your Cart</h2>
+                <div class="flex justify-between items-center w-full bg-sky-50 py-2 px-3 mt-2 rounded-xl">
+                    <div>
+                        <h3>Mango Tree</h3>
+                        <p class="mt-[2px]">৳500 x 1</p>
+                    </div>
+                    <p>❌</p>
+                </div>
+                <div class="flex justify-between items-center w-full bg-sky-50 py-2 px-3 mt-2 rounded-xl">
+                    <div>
+                        <h3>Mango Tree</h3>
+                        <p class="mt-[2px]">৳500 x 1</p>
+                    </div>
+                    <p>❌</p>
+                </div>
+                <div class="flex justify-between items-center w-full mt-4 font-semibold">
+                    <p>Total</p>
+                    <p>৳1000</p>
+                </div>
+            </div>
         </section>
 
         <!-- About Campaign Section -->
-        <section class="mt-20 w-3/5 mx-auto">
+        <section class="mt-20 w-full md:w-12/16 mx-auto">
             <h2 class="text-center text-xl font-bold">About the Campaign</h2>
-            <div class="flex justify-between items-center w-full mt-10">
-                <div class="w-1/2">
+            <div class="flex flex-col md:flex-row justify-between md:items-center gap-7 w-full mt-10">
+                <div class="w-full md:w-1/2">
                     <img src="./assets/about.png" alt="">
                 </div>
-                <div class="w-1/2 text-[.875rem] ml-7">
-                    <p class="text-justify">Green Earth is a global tree plantation initiative dedicated to fighting
+                <div class="w-full md:w-1/2 text-[.875rem] ">
+                    <p class="">Green Earth is a global tree plantation initiative dedicated to fighting
                         climate change. Since
                         our start, we’ve planted over 500,000 trees worldwide. By joining our campaign, you help restore
                         forests, create habitats for wildlife, and combat global warming.</p>
@@ -257,31 +257,32 @@
     </main>
 
     <!-- Our Impact Section -->
-    <section class=" mt-20 bg-sky-100 py-20">
+    <section class=" mt-20 bg-sky-100 pb-20 pt-10 md:py-20">
         <div class="w-11/12 mx-auto">
             <h2 class="text-center text-2xl font-bold text-[#1F2937]">Our Impact</h2>
-            <div class="flex gap-12 mt-10">
-                <div class="flex flex-col items-center rounded-xl gap-3 bg-white p-10 w-1/3">
+            <div class="flex flex-col gap-4 md:flex-row md:gap-12 mt-10">
+                <div class="flex flex-col items-center rounded-xl gap-3 bg-white p-10 w-full md:w-1/3">
                     <h2 class="text-xl font-semibold text-green-600">500K+</h2>
                     <p>Trees Planted</p>
                 </div>
-                <div class="flex flex-col items-center rounded-xl gap-3 bg-white p-10 w-1/3">
-                    <h2 class="text-xl font-semibold text-green-600">500K+</h2>
-                    <p>Trees Planted</p>
+                <div class="flex flex-col items-center rounded-xl gap-3 bg-white p-10 w-full md:w-1/3">
+                    <h2 class="text-xl font-semibold text-green-600">120+</h2>
+                    <p>Communities Involved</p>
                 </div>
-                <div class="flex flex-col items-center rounded-xl gap-3 bg-white p-10 w-1/3">
-                    <h2 class="text-xl font-semibold text-green-600">500K+</h2>
-                    <p>Trees Planted</p>
+                <div class="flex flex-col items-center rounded-xl gap-3 bg-white p-10 w-full md:w-1/3">
+                    <h2 class="text-xl font-semibold text-green-600">30+</h2>
+                    <p>Countries Reached</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Plant a Tree Today Section -->
-    <section class="bg-green-800 py-20">
-        <h2 class="font-bold text-2xl text-white text-center">Plant a Tree Today</h2>
-        <div class="mt-10 p-10 rounded-xl bg-green-700 md:w-6/15 mx-auto flex flex-col gap-3">
-            <input class="bg-white rounded-md border-none h-11 px-3 py-3" type="text" name="" id="" placeholder="Your Name">
+    <section class="bg-green-800 md:pb-20 md:pt-10 pb-15">
+        <h2 class="font-bold text-2xl text-white text-center p-10">Plant a Tree Today</h2>
+        <div class="px-3 py-10 md:p-10 rounded-xl bg-green-700 md:w-6/15 mx-auto flex flex-col gap-3">
+            <input class="bg-white rounded-md border-none h-11 px-3 py-3" type="text" name="" id=""
+                placeholder="Your Name">
             <input class="bg-white rounded-md border-none h-11 px-3 py-3" type="email" name="" id=""
                 placeholder="Your Email Address">
 
@@ -293,7 +294,8 @@
             </select>
 
             <button
-                class="btn bg-yellow-300 hover:bg-white border-none rounded-3xl text-green-600 text-[1rem] font-medium w-full  mt-2">Donate Now</button>
+                class="btn bg-yellow-300 hover:bg-white border-none rounded-3xl text-green-600 text-[1rem] font-medium w-full  mt-2">Donate
+                Now</button>
         </div>
     </section>
 
