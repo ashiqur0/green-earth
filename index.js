@@ -12,7 +12,12 @@ const showCategory = (categories) => {
     categories.forEach(category => {
         const categoryContainer = document.getElementById('category-container');
         const h2 = document.createElement('h2');
-        h2.innerHTML = `<h2 class="py-2 pl-3 hover:bg-green-600 hover:text-white font-medium rounded-lg">${category['category_name']}</h2>`
+        h2.innerHTML = `
+        <div onclick="plantByCategory(${category.id})" 
+            class="py-2 pl-3 hover:bg-green-600 hover:text-white font-medium rounded-lg">        
+            <button>${category['category_name']}</button>
+        </div>
+        `
         categoryContainer.appendChild(h2);
     });
 };
@@ -27,8 +32,11 @@ const allPlant = () => {
 allPlant();
 
 const showPlants = (allPlants) => {
+    
+    const allTreeCard = document.getElementById('tree-card-container');
+    allTreeCard.innerText = '';
+    
     allPlants.forEach(plant => {
-        const allTreeCard = document.getElementById('tree-card-container');
         const div = document.createElement('div');
         div.innerHTML = `
         <div class="flex flex-col items-start bg-white rounded-xl">
@@ -47,6 +55,13 @@ const showPlants = (allPlants) => {
         </div>
         `
         allTreeCard.appendChild(div);
-        console.log(plant);
     });
 };
+
+/** Category wise Plant card */
+const plantByCategory = (id) => {
+    const url = `https://openapi.programming-hero.com/api/category/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => showPlants(data.plants));
+}
