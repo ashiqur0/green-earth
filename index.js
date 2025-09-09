@@ -1,3 +1,4 @@
+const cart = [];
 
 /** Category Functionality */
 const category = () => {
@@ -52,12 +53,13 @@ const showPlants = (allPlants) => {
                     <p class="bg-green-200 text-green-600 text-[.875rem] rounded-3xl px-3 py-[2px] ">${plant.category}</p>
                     <p class="font-semibold">৳${plant.price}</p>
                 </div>
-                <button class="bg-green-600 hover:bg-green-200 hover:text-green-900 text-white rounded-3xl w-full mt-3 py-1.5">Add to Cart</button>
+                <button onclick="addToCart(${plant.id})"
+                    class="bg-green-600 hover:bg-green-200 hover:text-green-900 text-white rounded-3xl w-full mt-3 py-1.5">Add to Cart</button>
             </div>
         </div>
         `
         allTreeCard.appendChild(div);
-        // console.log(plant);
+        // console.log(addToCart);
     });
 };
 
@@ -71,22 +73,13 @@ const plantByCategory = (id) => {
 
 /** Plants Details Modal */
 const plantDetails = (id) => {
-    // console.log(plant);
     const url = `https://openapi.programming-hero.com/api/plant/${id}`;
     fetch(url)
         .then(res => res.json())
         .then(data => showDetails(data.plants));
 }
-// {
-//     "id": 29,
-//     "image": "https://i.ibb.co.com/4g4J0Tkj/lotus-min.jpg",
-//     "name": "Lotus",
-//     "description": "A sacred aquatic plant with beautiful pink or white flowers. Symbolizes purity and grows in still, shallow water.",
-//     "category": "Aquatic Plant",
-//     "price": 450
-// }
+
 const showDetails = (details) => {
-    // console.log(details);
     const detailsBox = document.getElementById('details-container');
     detailsBox.innerHTML = `
     <h2 class="text-xl font-semibold mb-4">Mango Tree</h2>
@@ -100,4 +93,49 @@ const showDetails = (details) => {
     <p class="mt-2"><span class="font-bold">Description: </span>${details.description}</p>
     `
     document.getElementById('modal').showModal();
+}
+
+/**  Cart Functionality  */
+const addToCart = (id) => {
+    // console.log(id);
+    const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+    fetch(url)
+    .then(res => res.json())
+    .then(plant => {
+        const add = {
+            treeName : plant.plants.name,
+            price : plant.plants.price
+        }
+        cart.push(add);
+
+        const totalContainer = document.getElementById('total');
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+        <div class="flex justify-between items-center w-full bg-sky-50 py-2 px-3 mt-2 rounded-xl">
+            <div>
+                <h3>${plant.plants.name}</h3>
+                <p class="mt-[2px]">৳${plant.plants.price} x 1</p>
+            </div>
+            <p>❌</p>
+        </div>
+        `
+        totalContainer.appendChild(newElement);
+
+        const totalPrice = parseInt(document.getElementById('total-price').innerText);
+        totalPrice += add.price;
+        console.log(totalPrice);
+        document.getElementById('total-price').innerText = totalPrice;
+        // totalPrice();
+    });
+}
+
+function totalPrice() {
+    const totalPrice = parseInt(document.getElementById('total-price').innerText);
+    // console.log(totalPrice);
+    for (const p of cart) {
+        totalPrice = totalPrice + p.price;
+        console.log(p.price);
+    }
+    // console.log(cart);
+    document.getElementById('total-price').innerText = totalPrice;
 }

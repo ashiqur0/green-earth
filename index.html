@@ -102,25 +102,14 @@
             </div>
 
             <!-- Total card -->
-            <div class="bg-white rounded-xl p-4 row-span-2 md:w-1/5">
+            <div class="bg-white rounded-xl p-4 row-span-2 md:w-6/20">
                 <h2 class="text-xl font-bold ">Your Cart</h2>
-                <div class="flex justify-between items-center w-full bg-sky-50 py-2 px-3 mt-2 rounded-xl">
-                    <div>
-                        <h3>Mango Tree</h3>
-                        <p class="mt-[2px]">৳500 x 1</p>
-                    </div>
-                    <p>❌</p>
+                <div id="total">
+
                 </div>
-                <div class="flex justify-between items-center w-full bg-sky-50 py-2 px-3 mt-2 rounded-xl">
-                    <div>
-                        <h3>Mango Tree</h3>
-                        <p class="mt-[2px]">৳500 x 1</p>
-                    </div>
-                    <p>❌</p>
-                </div>
-                <div class="flex justify-between items-center w-full mt-4 font-semibold">
+                <div id="total-price-container" class="flex justify-between items-center w-full mt-4 font-semibold">
                     <p>Total</p>
-                    <p>৳1000</p>
+                    <p>৳<span id="total-price">100</span></p>
                 </div>
             </div>
         </section>
@@ -195,6 +184,7 @@
         <p class="md:w-2/5 mx-auto">© 2025 Green Earth. All Rights Reserved.</p>
     </footer>
 
+    <!-- Modal -->
     <dialog id="modal" class="modal">
         <div class="modal-box">
             <div id="details-container">
