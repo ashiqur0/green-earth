@@ -5,7 +5,9 @@ const category = () => {
     const url = 'https://openapi.programming-hero.com/api/categories';
     fetch(url)
         .then(res => res.json())
-        .then(data => showCategory(data.categories));
+        .then(data => {
+            showCategory(data.categories);
+        });
 };
 category();
 
@@ -14,11 +16,12 @@ const showCategory = (categories) => {
         const categoryContainer = document.getElementById('category-container');
         const h2 = document.createElement('h2');
         h2.innerHTML = `
-        <div onclick="plantByCategory(${category.id})" 
-            class="py-2 pl-3 hover:bg-green-600 hover:text-white font-medium rounded-lg">        
+        <div onclick="plantByCategory(${category.id})" id="lesson-btn-${category.id}"
+            class="category-name py-2 pl-3 hover:bg-green-600 hover:text-white font-medium rounded-lg">        
             <button>${category['category_name']}</button>
         </div>
         `
+        
         categoryContainer.appendChild(h2);
     });
 };
@@ -40,7 +43,7 @@ const showPlants = (allPlants) => {
     allPlants.forEach(plant => {
         const div = document.createElement('div');
         div.innerHTML = `
-        <div class="flex flex-col items-start bg-white rounded-xl">
+        <div class="flex flex-col items-start bg-white rounded-xl shadow-md">
             <div class="rounded-xl w-full h-50 md:h-40 overflow-hidden">
                 <img src='${plant.image}' alt="">
             </div>
@@ -59,16 +62,29 @@ const showPlants = (allPlants) => {
         </div>
         `
         allTreeCard.appendChild(div);
-        // console.log(addToCart);
+        manageSpinner(false);
     });
 };
 
 /** Category wise Plant card */
 const plantByCategory = (id) => {
+    manageSpinner(true);
+
     const url = `https://openapi.programming-hero.com/api/category/${id}`;
     fetch(url)
-        .then(res => res.json())
-        .then(data => showPlants(data.plants));
+    .then(res => res.json())
+    .then(data => {
+        showPlants(data.plants);
+        removeActive();
+        const clickedButton = document.getElementById(`lesson-btn-${id}`);
+        clickedButton.classList.add('active');
+    });
+}
+
+// Deselection of all button UI
+const removeActive = () => {
+    const category = document.querySelectorAll('.category-name');
+    category.forEach(button => button.classList.remove('active'));
 }
 
 /** Plants Details Modal */
@@ -94,47 +110,76 @@ const showDetails = (details) => {
     `
     document.getElementById('modal').showModal();
 }
-let i = 0;
+
 /**  Cart Functionality  */
 const addToCart = (id) => {
-    // console.log(id);
     const url = `https://openapi.programming-hero.com/api/plant/${id}`;
     fetch(url)
     .then(res => res.json())
-    .then(plant => {
+    .then(plant => {        
         const add = {
-            id : ++i,
             treeName : plant.plants.name,
             price : plant.plants.price
         }
         cart.push(add);
 
-        const totalContainer = document.getElementById('total');
+        cartItemsAndTotalPrice();
+    });
+}
+
+function cartItemsAndTotalPrice() {
+    const totalContainer = document.getElementById('total');
+    totalContainer.innerHTML = '';
+
+    let totalPrice = 0;
+
+    for (let plant = 0; plant < cart.length;  plant++) {        
         const newElement = document.createElement('div');
         newElement.innerHTML = `
         <div class="flex justify-between items-center w-full bg-sky-50 py-2 px-3 mt-2 rounded-xl">
-            <div>
-                <h3>${plant.plants.name}</h3>
-                <p class="mt-[2px]">৳${plant.plants.price} x 1</p>
-            </div>
-            <p onclick="removeTotalCart()" >❌</p>
+        <div>
+        <h3 class='font-semibold'>${cart[plant].treeName}</h3>
+        <p class="mt-[2px]">৳${cart[plant].price} x 1</p>
+        </div>
+        <button onclick="removeItem('${plant}')">❌</button>
         </div>
         `
         totalContainer.appendChild(newElement);
 
-        let totalPrice = parseInt(document.getElementById('total-price').innerText);
-        totalPrice += add.price;
-        document.getElementById('total-price').innerText = totalPrice;
-    });
+        totalPrice += cart[plant].price;
+    }
+    document.getElementById('total-price').innerText = totalPrice;
 }
 
-function totalPrice() {
-    const totalPrice = parseInt(document.getElementById('total-price').innerText);
-    // console.log(totalPrice);
-    for (const p of cart) {
-        totalPrice = totalPrice + p.price;
-        console.log(p.price);
+function removeItem(id) {
+    const totalContainer = document.getElementById('total');
+    totalContainer.innerHTML = '';
+    cart.splice(id, 1);
+    
+    let totalPrice = 0;
+
+    for (let plant = 0; plant < cart.length;  plant++) {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+        <div class="flex justify-between items-center w-full bg-sky-50 py-2 px-3 mt-2 rounded-xl">
+        <div>
+        <h3>${cart[plant].treeName}</h3>
+        <p class="mt-[2px]">৳${cart[plant].price} x 1</p>
+        </div>
+        <button onclick="removeItem('${plant}')">❌</button>
+        </div>
+        `;
+        totalContainer.appendChild(newElement);
+        totalPrice += cart[plant].price;
     }
-    // console.log(cart);
     document.getElementById('total-price').innerText = totalPrice;
+}
+
+// Spinner Functionality [while loading data of word of lesson from API]
+const manageSpinner = (status) => {
+    if (status == true) {
+        document.getElementById('spinner').classList.remove('hidden');
+    } else {
+        document.getElementById('spinner').classList.add('hidden');
+    }
 }

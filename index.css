@@ -2,6 +2,11 @@
     font-family: "Inter", sans-serif;
 }
 
+.active {
+    background-color: #16a34a;
+    color: white;
+}
+
 @media screen and (max-width: 576px)  {
     .banner-image {
         display: none;

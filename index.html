@@ -50,11 +50,11 @@
                 <ul class="menu menu-horizontal px-1 text-white font-semibold">
                     <li><a>About</a></li>
                     <li><a>Gallery</a></li>
-                    <li><a>Plant a Tree</a></li>
+                    <li ><a href="#plant-a-tree">Plant a Tree</a></li>
                 </ul>
             </div>
             <div class="navbar-end md:pr-20">
-                <a
+                <a href="#plant-a-tree"
                     class="btn bg-yellow-300 hover:bg-white border-none rounded-3xl text-green-600 text-[1rem] font-medium">Plant
                     a Tree</a>
             </div>
@@ -73,7 +73,7 @@
                     greener for future
                     generations.</p>
                 <div class="">
-                    <a
+                    <a href="#plant-a-tree"
                         class="btn bg-yellow-300 hover:bg-white border-none rounded-3xl text-green-600 text-[1rem] font-medium">Get
                         Involved</a>
                 </div>
@@ -87,8 +87,13 @@
     </header>
 
     <!-- Main Section -->
-    <main class="mt-20 w-115/120 mx-auto ">
-        <h2 class="text-2xl font-semibold text-center text-[#1F2937] pb-10">Choose Your Trees</h2>
+    <main class="mt-5 w-115/120 mx-auto ">
+        <!-- Loading spinner -->
+        <section id="spinner" class="text-center mt-10 hidden">
+            <span class="loading loading-dots loading-lg"></span>
+        </section>
+
+        <h2 class="text-2xl font-semibold text-center text-[#1F2937] py-5">Choose Your Trees</h2>
 
         <!-- Card Item Section -->
         <section class="flex flex-col md:flex-row gap-5">
@@ -98,11 +103,11 @@
             </aside>
 
             <!-- Tree Card Container -->
-            <div id="tree-card-container" class="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
+            <div id="tree-card-container" class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-5 w-full ">
             </div>
 
             <!-- Total card -->
-            <div class="bg-white rounded-xl p-4 row-span-2 md:w-6/20">
+            <div class="bg-white rounded-xl p-4 md:w-6/20">
                 <h2 class="text-xl font-bold ">Your Cart</h2>
                 <div id="total">
 
@@ -158,7 +163,7 @@
     </section>
 
     <!-- Plant a Tree Today Section -->
-    <section class="bg-green-800 md:pb-20 md:pt-10 pb-15">
+    <section id="plant-a-tree" class="bg-green-800 md:pb-20 md:pt-10 pb-15">
         <h2 class="font-bold text-2xl text-white text-center p-10">Plant a Tree Today</h2>
         <div class="px-3 py-10 md:p-10 rounded-xl bg-green-700 md:w-6/15 mx-auto flex flex-col gap-3">
             <input class="bg-white rounded-md border-none h-11 px-3 py-3" type="text" name="" id=""
@@ -188,7 +193,7 @@
     <dialog id="modal" class="modal">
         <div class="modal-box">
             <div id="details-container">
-                
+
             </div>
             <div class="modal-action">
                 <form method="dialog">
